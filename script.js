@@ -97,16 +97,4 @@
       else if (!ev.shiftKey && document.activeElement === b) { ev.preventDefault(); a.focus(); }
     }
   });
-
-  // Schneeflocken (reines CSS-Deko, dezent)
-  var schnee = document.querySelector(".schnee");
-  for (var i = 0; i < 24; i++) {
-    var f = document.createElement("span");
-    f.style.left = (i * 4.2 + (i % 3) * 1.3) + "%";
-    f.style.animationDuration = (12 + (i * 7) % 11) + "s";
-    f.style.animationDelay = "-" + ((i * 5) % 17) + "s";
-    f.style.fontSize = (8 + (i % 4) * 3) + "px";
-    f.textContent = "•";
-    schnee.appendChild(f);
-  }
 })();

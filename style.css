@@ -1,129 +1,110 @@
 /* Design der App. Farben stehen oben und lassen sich hier zentral ändern. */
 :root {
-  --nacht: #0f2a24;
-  --nacht-hell: #17382f;
-  --rot: #b3202a;
-  --rot-dunkel: #8e1820;
+  --grund: #10221c;
+  --flaeche: #183029;
+  --linie: rgba(251, 244, 228, .14);
+  --text: #f6f1e4;
+  --text-leise: rgba(246, 241, 228, .72);
+  --rot: #c0392b;
+  --rot-dunkel: #a02e22;
   --gold: #e9c46a;
-  --creme: #fbf4e4;
-  --serif: Georgia, "Times New Roman", serif;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 * { box-sizing: border-box; }
-html, body { height: 100%; }
 body {
-  margin: 0;
-  background: radial-gradient(ellipse at top, var(--nacht-hell), var(--nacht) 70%) fixed;
-  color: var(--creme);
-  font-family: var(--sans);
-  font-size: 1.1rem;
-  line-height: 1.6;
+  margin: 0; min-height: 100vh;
+  background: var(--grund); color: var(--text);
+  font-family: var(--sans); font-size: 1.05rem; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 [hidden] { display: none !important; }
-main { position: relative; z-index: 2; max-width: 62rem; margin: 0 auto; padding: 4.5rem 1.25rem 3rem; }
+main { max-width: 56rem; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
 
-h1, h2 { font-family: var(--serif); font-weight: 700; line-height: 1.2; margin: 0; }
-h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); text-align: center; color: var(--gold); }
-.intro { text-align: center; margin: .75rem 0 2.5rem; opacity: .9; }
+h1, h2 { margin: 0; line-height: 1.15; letter-spacing: -.02em; font-weight: 700; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); text-align: center; }
+.intro { text-align: center; margin: 1rem 0 3.5rem; color: var(--text-leise); }
 
-/* Lichterkette */
-.lichter {
-  position: fixed; top: 0; left: 0; right: 0; height: 2.2rem; z-index: 3; pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 70%, var(--gold) 0 .28rem, transparent .32rem) 0 0 / 3rem 100% repeat-x,
-    radial-gradient(circle at 50% 70%, #e2555e 0 .28rem, transparent .32rem) 1.5rem 0 / 3rem 100% repeat-x;
-  border-top: 2px solid rgba(233,196,106,.45);
-  animation: glimmen 4s ease-in-out infinite alternate;
-}
-@keyframes glimmen { from { opacity: .7; } to { opacity: 1; } }
-
-/* Schnee */
-.schnee { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.schnee span { position: absolute; top: -1rem; color: rgba(255,255,255,.55); animation: fallen linear infinite; }
-@keyframes fallen { to { transform: translateY(110vh) translateX(2rem); } }
-
-/* Kacheln = Geschenkanhänger */
-.kacheln { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; grid-template-columns: repeat(3, 1fr); }
+/* Kacheln */
+.kacheln { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
 .kachel {
-  position: relative; width: 100%; min-height: 11rem; padding: 2.2rem 1rem 1.25rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem;
-  background: var(--rot); color: var(--creme);
-  border: 3px solid var(--gold); border-radius: .4rem 1.6rem .4rem 1.6rem;
+  width: 100%; min-height: 10.5rem; padding: 1.5rem 1rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  background: var(--flaeche); color: var(--text);
+  border: 1px solid var(--linie); border-radius: 1.25rem;
   font: inherit; cursor: pointer;
-  transition: transform .15s ease, background .15s ease;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
 }
-/* Loch des Anhängers */
-.kachel::before {
-  content: ""; position: absolute; top: .7rem; left: 50%; width: .9rem; height: .9rem; margin-left: -.45rem;
-  border-radius: 50%; background: var(--nacht); border: 2px solid var(--gold);
+.kachel-icon {
+  display: grid; place-items: center; width: 4.25rem; height: 4.25rem; border-radius: 50%;
+  background: rgba(246, 241, 228, .08); font-size: 2.1rem; line-height: 1;
 }
-.kachel-icon { font-size: 3rem; line-height: 1; }
-.kachel-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; }
-.kachel:hover:not(:disabled) { background: var(--rot-dunkel); transform: translateY(-4px) rotate(-1deg); }
-.kachel:disabled {
-  background: transparent; border-style: dashed; border-color: rgba(233,196,106,.4);
-  color: rgba(251,244,228,.65); cursor: not-allowed;
-}
-.kachel:disabled .kachel-icon { filter: grayscale(1); opacity: .5; }
+.kachel-name { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
+.kachel:hover:not(:disabled) { border-color: var(--gold); background: #1d3a31; transform: translateY(-2px); }
+.kachel:disabled { background: transparent; border-style: dashed; color: var(--text-leise); cursor: not-allowed; }
+.kachel:disabled .kachel-icon { filter: grayscale(1); opacity: .45; }
 
-:focus-visible { outline: 4px solid var(--gold); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
 /* Knöpfe */
 .knopf {
   display: inline-block; font: inherit; font-weight: 600; text-decoration: none; text-align: center;
-  padding: .85rem 1.5rem; min-height: 3rem; border-radius: .6rem; cursor: pointer;
-  background: var(--gold); color: #3a2a00; border: 2px solid var(--gold);
+  padding: .8rem 1.5rem; min-height: 3rem; border-radius: 999px; cursor: pointer;
+  background: var(--gold); color: #2b2100; border: 1px solid var(--gold);
+  transition: background .15s ease;
 }
-.knopf:hover { background: #f3d58a; }
-.knopf-leise { background: transparent; color: var(--creme); border-color: rgba(251,244,228,.6); }
-.knopf-leise:hover { background: rgba(251,244,228,.12); }
+.knopf:hover { background: #f1d388; }
+.knopf-leise { background: transparent; color: var(--text); border-color: var(--linie); }
+.knopf-leise:hover { background: rgba(246, 241, 228, .08); }
 
 /* Detailansicht */
 .karte {
-  max-width: 36rem; margin: 2rem auto 0; padding: 2.5rem 1.75rem; text-align: center;
-  background: var(--creme); color: #2a1a12; border: 4px solid var(--gold); border-radius: .5rem 2rem .5rem 2rem;
+  max-width: 34rem; margin: 1rem auto 0; padding: 3rem 2rem; text-align: center;
+  background: var(--flaeche); border: 1px solid var(--linie); border-radius: 1.5rem;
   display: flex; flex-direction: column; align-items: center; gap: 1rem;
 }
-.detail-icon { font-size: 4rem; line-height: 1; }
-.detail-name { margin: 0; color: var(--rot-dunkel); font-weight: 600; }
+.detail-icon {
+  display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border-radius: 50%;
+  background: rgba(246, 241, 228, .08); font-size: 2.8rem; line-height: 1;
+}
+.detail-name { margin: 0; color: var(--text-leise); }
 .karte h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); outline: none; }
 .karte p { margin: 0; white-space: pre-line; }
-.karte .knopf-leise { color: #2a1a12; border-color: rgba(42,26,18,.5); }
-.karte .knopf-leise:hover { background: rgba(42,26,18,.08); }
-.karte :focus-visible { outline-color: var(--rot); }
+.karte #detail-text { max-width: 28rem; color: var(--text-leise); }
+.karte .knopf { margin-top: .5rem; }
 
 /* Dialog */
 #dialog-hintergrund {
   position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center;
-  padding: 1rem; background: rgba(5,15,12,.8);
+  padding: 1rem; background: rgba(4, 12, 9, .78); backdrop-filter: blur(4px);
 }
 #dialog {
-  max-width: 30rem; width: 100%; padding: 2rem 1.5rem; background: var(--creme); color: #2a1a12;
-  border: 4px solid var(--gold); border-radius: .5rem 1.8rem .5rem 1.8rem;
+  max-width: 28rem; width: 100%; padding: 2rem 1.75rem;
+  background: #f6f1e4; color: #231a14; border-radius: 1.5rem;
   animation: auf .2s ease-out;
 }
-@keyframes auf { from { transform: scale(.94); opacity: 0; } }
-#dialog h2 { font-size: 1.7rem; color: var(--rot-dunkel); margin-bottom: .75rem; }
-#dialog p { margin: 0 0 .9rem; }
-.dialog-frage { font-weight: 600; }
+@keyframes auf { from { transform: scale(.96); opacity: 0; } }
+#dialog h2 { font-size: 1.6rem; margin-bottom: .75rem; }
+#dialog p { margin: 0 0 .8rem; color: #4a3d33; }
+#dialog .dialog-frage { font-weight: 600; color: #231a14; }
 .dialog-knoepfe { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
 .dialog-knoepfe .knopf { flex: 1 1 12rem; }
-#dialog .knopf { background: var(--rot); border-color: var(--rot); color: var(--creme); }
+#dialog .knopf { background: var(--rot); border-color: var(--rot); color: #fff; }
 #dialog .knopf:hover { background: var(--rot-dunkel); }
-#dialog .knopf-leise { background: transparent; color: #2a1a12; border-color: rgba(42,26,18,.5); }
-#dialog .knopf-leise:hover { background: rgba(42,26,18,.08); }
-#dialog :focus-visible { outline-color: #2a1a12; }
+#dialog .knopf-leise { background: transparent; color: #231a14; border-color: rgba(35, 26, 20, .25); }
+#dialog .knopf-leise:hover { background: rgba(35, 26, 20, .07); }
+#dialog :focus-visible { outline-color: #231a14; }
 
-/* Handy / Tablet */
-@media (max-width: 52rem) { .kacheln { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 32rem) {
-  .kacheln { grid-template-columns: 1fr; gap: 1.1rem; }
-  .kachel { min-height: 9rem; }
-  main { padding-top: 3.5rem; }
+/* Tablet / Handy */
+@media (max-width: 48rem) { .kacheln { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 30rem) {
+  main { padding-top: 3rem; }
+  .intro { margin-bottom: 2.25rem; }
+  .kacheln { grid-template-columns: 1fr; }
+  .kachel { min-height: 0; flex-direction: row; justify-content: flex-start; gap: 1.1rem; padding: 1.1rem 1.25rem; }
+  .kachel-icon { width: 3.5rem; height: 3.5rem; font-size: 1.8rem; }
+  .karte { padding: 2.25rem 1.25rem; }
 }
 
-/* Wer Bewegung reduziert hat, bekommt keine Animation */
 @media (prefers-reduced-motion: reduce) {
-  .schnee { display: none; }
-  .lichter, #dialog, .kachel { animation: none; transition: none; }
+  .kachel, #dialog { animation: none; transition: none; }
 }
