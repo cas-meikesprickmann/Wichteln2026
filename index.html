@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weihnachtswünsche</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="schnee" aria-hidden="true"></div>
+  <div class="lichter" aria-hidden="true"></div>
+
+  <main>
+    <!-- Startseite -->
+    <section id="start">
+      <h1>Weihnachtswünsche</h1>
+      <p class="intro">Such dir einen Namen aus, aber nicht deinen eigenen.</p>
+      <ul id="kacheln" class="kacheln"></ul>
+    </section>
+
+    <!-- Detailansicht (wird erst nach Bestätigung gefüllt) -->
+    <section id="detail" hidden>
+      <article class="karte">
+        <div class="detail-icon" id="detail-icon" aria-hidden="true"></div>
+        <p class="detail-name" id="detail-name"></p>
+        <h2 id="detail-titel" tabindex="-1"></h2>
+        <p id="detail-text"></p>
+        <a id="detail-link" class="knopf" target="_blank" rel="noopener noreferrer"></a>
+        <button type="button" id="zurueck" class="knopf knopf-leise">Zurück zur Übersicht</button>
+      </article>
+    </section>
+  </main>
+
+  <!-- Bestätigungsdialog -->
+  <div id="dialog-hintergrund" hidden>
+    <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-titel" aria-describedby="dialog-text">
+      <h2 id="dialog-titel">Psst … Überraschungsalarm! 🎁</h2>
+      <p id="dialog-text">Hinter dieser Kachel steckt ein Weihnachtswunsch. Öffne sie nur, wenn es nicht dein eigener ist, sonst ist die Überraschung dahin.</p>
+      <p class="dialog-frage">Bist du dir wirklich sicher, dass du den Wunsch sehen möchtest?</p>
+      <div class="dialog-knoepfe">
+        <button type="button" id="ja" class="knopf">Ja, ich bin nicht gemeint</button>
+        <button type="button" id="abbrechen" class="knopf knopf-leise">Lieber nicht</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="wuensche.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
