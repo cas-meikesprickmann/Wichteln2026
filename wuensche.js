@@ -41,10 +41,10 @@ const WUENSCHE = [
   },
   {
     name: "Gino", icon: "🌲",
-    titel: "Platzhalter-Wunsch für Gino",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Beheizbare Weste",
+    beschreibung: "Gino freut sich über eine beheizbare Weste um seine Zigarren auch an kühlen Tagen entspannt genießen zu können. Er wünscht sich Größe XL",
+    linkText: "Zur Weste Größe XL",
+    linkUrl: "https://amzn.eu/d/08Z6NzU9"
   },
   {
     name: "Gaby", icon: "❄️",
