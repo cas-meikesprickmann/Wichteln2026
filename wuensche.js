@@ -20,30 +20,30 @@ const WUENSCHE = [
   },
   {
     name: "Nino", icon: "🔔",
-    titel: "Platzhalter-Wunsch für Nino",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Smart-Ring für Nino",
+    beschreibung: "Nino wünscht sich einen Smart-Ring, für Puls-Überwachung, Schlaf-Tracking usw. Es gibt wohl auch welche, die bei „Benachrichtigungen“ auf dem Handy vibrieren. In Silber oder Schwarz, ohne konkretes Modell.",
+    linkText: "Hier ein Beispiel",
+    linkUrl: "https://amzn.eu/d/08Zj8KGy"
   },
   {
     name: "Marion", icon: "🎁",
-    titel: "Platzhalter-Wunsch für Marion",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Barfußschuhe für Marion",
+    beschreibung: "Marion freut sich über Barfußschuhe von Leguano für den Sport beim TSV. Das gewünschte Modell heißt inspiro Sport oder Score in Schwarz in der Größe 40.",
+    linkText: "Link zum Schuh",
+    linkUrl: "https://www.sportsonline.de/leguano-inspiro-barfussschuhe-slipper-black-1006301040-1359277?affiliateCode=Idealo_SportOnline_de"
   },
   {
     name: "Stefan", icon: "🕯️",
-    titel: "Platzhalter-Wunsch für Stefan",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Warmer Pulli für Stefan",
+    beschreibung: "Stefan wünscht sich einen neuen Kuschelpulli von den bewaffneten Engeln in Größe XL farblich passend zu den Tannenzweigen in Petrol Grün.",
+    linkText: "Link zum Pulli",
+    linkUrl: "https://www.armedangels.com/products/baaro-fleece-sweatshirt-petrol-velvet?option_values=11973503746373%2C11973503156549"
   },
   {
     name: "Gino", icon: "🌲",
     titel: "Beheizbare Weste",
     beschreibung: "Gino freut sich über eine beheizbare Weste um seine Zigarren auch an kühlen Tagen entspannt genießen zu können. Er wünscht sich Größe XL",
-    linkText: "Zur Weste Größe XL",
+    linkText: "Hier geht es zur Weste",
     linkUrl: "https://amzn.eu/d/08Z6NzU9"
   },
   {
@@ -55,10 +55,10 @@ const WUENSCHE = [
   },
   {
     name: "Meike", icon: "🛷",
-    titel: "Platzhalter-Wunsch für Meike",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Beschriftungsgerät für Meike",
+    beschreibung: "Meike wünscht sich ein Beschriftungsgerät - direkt mit den Beschriftungsbändern. Das Midell von Brother P-Touch E110 in schwarz orage gefällt Meike super gut. Als Schriftband in 12 mm wäre schwarze Schrift auf weißem Band und weiße Schrift auf schwarzem Band super.",
+    linkText: "Link zum Beschriftungsgerät",
+    linkUrl: "https://www.bueroshop24.de/brother-p-touch-e110-beschriftungsgeraet-416204"
   },
   {
     name: "Julian", icon: "🍬",
