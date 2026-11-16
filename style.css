@@ -2,6 +2,7 @@
 :root {
   --grund: #10221c;
   --flaeche: #183029;
+  --flaeche-hover: #1d3a31;
   --linie: rgba(251, 244, 228, .14);
   --text: #f6f1e4;
   --text-leise: rgba(246, 241, 228, .72);
@@ -13,7 +14,7 @@
 * { box-sizing: border-box; }
 body {
   margin: 0; min-height: 100vh;
-  background: var(--grund); color: var(--text);
+  background: var(--grund); color: var(--text); transition: background .6s ease;
   font-family: var(--sans); font-size: 1.05rem; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -39,7 +40,7 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); text-align: center; }
   background: rgba(246, 241, 228, .08); font-size: 2.1rem; line-height: 1;
 }
 .kachel-name { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
-.kachel:hover:not(:disabled) { border-color: var(--gold); background: #1d3a31; transform: translateY(-2px); }
+.kachel:hover:not(:disabled) { border-color: var(--gold); background: var(--flaeche-hover); transform: translateY(-2px); }
 .kachel:disabled { background: transparent; border-style: dashed; color: var(--text-leise); cursor: not-allowed; }
 .kachel:disabled .kachel-icon { filter: grayscale(1); opacity: .45; }
 
@@ -94,3 +95,37 @@ h1:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   .kachel { transition: none; }
 }
+
+/* Farbwechsel nach der Namenswahl (Seite 2 und 3) */
+body[data-seite="wahl"], body[data-seite="wunsch"] {
+  --grund: #3b1119; --flaeche: #55202a; --flaeche-hover: #6a2a36;
+}
+
+/* Schnee */
+.schnee { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.schnee span { position: absolute; top: -1rem; color: rgba(255, 255, 255, .7); animation: fallen linear infinite; }
+@keyframes fallen { to { transform: translateY(110vh) translateX(2rem); } }
+main { position: relative; z-index: 2; }
+
+/* Hervorgehobener Kasten */
+h1 { margin-bottom: 2rem; }
+.hinweis {
+  max-width: 40rem; margin: 0 auto 2.5rem; padding: 2rem 1.75rem; text-align: center;
+  background: #f6f1e4; color: #3a2d24; border: 3px solid var(--gold); border-radius: 1.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+}
+.hinweis p { margin: 0 0 .8rem; font-size: 1.15rem; }
+.hinweis p:last-child { margin-bottom: 0; }
+.hinweis h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); color: #a02e22; margin-bottom: 1rem; outline: none; }
+.hinweis .frage { margin-top: 1.25rem; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 700; line-height: 1.2; color: #231a14; }
+
+/* Kleinere Namenskacheln auf Seite 1 */
+.kacheln.klein .kachel { min-height: 0; padding: 1rem; gap: .6rem; }
+.kacheln.klein .kachel-icon { width: 3rem; height: 3rem; font-size: 1.5rem; }
+.kacheln.klein .kachel-name { font-size: 1.05rem; }
+@media (max-width: 30rem) {
+  .kacheln.klein { grid-template-columns: repeat(2, 1fr); }
+  .kacheln.klein .kachel { flex-direction: column; justify-content: center; padding: 1rem .75rem; }
+  .hinweis { padding: 1.5rem 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) { .schnee { display: none; } body { transition: none; } }

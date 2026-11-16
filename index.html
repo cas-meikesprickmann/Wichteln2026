@@ -3,28 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weihnachtswünsche</title>
+  <title>Weihnachtswichtel</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-seite="ich">
+  <div class="schnee" aria-hidden="true"></div>
+
   <main>
-    <!-- Schritt 1: Wer bist du? -->
+    <!-- Seite 1: Begrüßung und Namenswahl -->
     <section id="schritt-ich">
-      <h1 tabindex="-1">Wichtelwünsche</h1>
-      <p class="intro">Wer bist du? Such deinen Namen aus.</p>
-      <ul id="kacheln-ich" class="kacheln"></ul>
+      <h1 tabindex="-1">Willkommen liebe Wichtel</h1>
+      <div class="hinweis">
+        <p>Hallo lieber Weihnachtswichtel. Schön, dass du da bist.</p>
+        <p class="frage">Welcher Weihnachtswichtel bist du?</p>
+      </div>
+      <ul id="kacheln-ich" class="kacheln klein"></ul>
     </section>
 
-    <!-- Schritt 2: Wessen Wunsch? (eigene Kachel wird ausgeblendet) -->
+    <!-- Seite 2: Wunsch auswählen (eigene Kachel wird ausgeblendet) -->
     <section id="schritt-wahl" hidden>
-      <h1 id="wahl-titel" tabindex="-1"></h1>
-      <p class="intro">Wähle den Namen, für den du den Wunsch sehen möchtest.</p>
+      <div class="hinweis">
+        <h2 id="wahl-titel" tabindex="-1"></h2>
+        <p>Du kannst Dir nun den Wunsch anzeigen lassen, den dein Wichtel sich wünscht. Klicke dazu einfach auf den Namen deines Wichtels.</p>
+        <p>Bei Fragen melde dich bei unserer Weihnachtswichtelwunschkoordinatorin Meike.</p>
+      </div>
       <ul id="kacheln-wahl" class="kacheln"></ul>
       <p class="mitte"><button type="button" id="nicht-ich" class="knopf knopf-leise">Zurück</button></p>
     </section>
 
-    <!-- Schritt 3: Wunsch -->
+    <!-- Seite 3: Wunsch -->
     <section id="schritt-wunsch" hidden>
       <article class="karte">
         <div class="detail-icon" id="detail-icon" aria-hidden="true"></div>

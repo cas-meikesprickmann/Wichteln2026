@@ -18,6 +18,7 @@
 
   function zeige(name, fokus) {
     Object.keys(schritte).forEach(function (k) { schritte[k].hidden = (k !== name); });
+    document.body.dataset.seite = name; // steuert die Farbe der Seite (siehe style.css)
     window.scrollTo(0, 0);
     if (fokus) fokus.focus();
   }
@@ -63,7 +64,7 @@
   function ichWaehlen(e) {
     ich = e;
     var titel = document.getElementById("wahl-titel");
-    titel.textContent = "Hallo " + e.name + "!";
+    titel.textContent = "Hallo Wichtel " + e.name + "!";
     wahlAufbauen();
     zeige("wahl", titel);
   }
@@ -94,4 +95,16 @@
     document.getElementById("kacheln-wahl").innerHTML = "";
     zeige("ich", schritte.ich.querySelector("h1"));
   });
+
+  // Schnee im Hintergrund (reine Deko)
+  var schnee = document.querySelector(".schnee");
+  for (var i = 0; i < 40; i++) {
+    var f = document.createElement("span");
+    f.textContent = "\u2022";
+    f.style.left = ((i * 2.5 + (i % 4) * 0.9) % 100) + "%";
+    f.style.fontSize = (10 + (i % 4) * 5) + "px";
+    f.style.animationDuration = (9 + (i * 7) % 12) + "s";
+    f.style.animationDelay = "-" + ((i * 5) % 19) + "s";
+    schnee.appendChild(f);
+  }
 })();
