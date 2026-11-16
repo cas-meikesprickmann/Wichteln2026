@@ -1,56 +1,76 @@
-/* Logik der App – hier musst du nichts ändern. */
+/* Logik der App – hier musst du nichts ändern.
+   Ablauf: "Ich bin ..." wählen -> Namenskachel einer anderen Person -> Wunsch.
+   Die eigene Kachel wird nicht angezeigt. Es wird nichts gespeichert (kein Tracking, keine Cookies). */
 (function () {
   "use strict";
 
-  var liste = document.getElementById("kacheln");
-  var start = document.getElementById("start");
-  var detail = document.getElementById("detail");
-  var hintergrund = document.getElementById("dialog-hintergrund");
-  var jaKnopf = document.getElementById("ja");
-  var abbrechenKnopf = document.getElementById("abbrechen");
+  var schritte = {
+    ich: document.getElementById("schritt-ich"),
+    wahl: document.getElementById("schritt-wahl"),
+    wunsch: document.getElementById("schritt-wunsch")
+  };
+  var ich = null;           // wer gerade die App benutzt (nur im Arbeitsspeicher)
+  var letzteKachel = null;  // für den Fokus beim Zurückgehen
 
-  var gewaehlt = null;      // Eintrag, der gerade bestätigt werden soll
-  var letzteKachel = null;  // Kachel, auf die der Fokus zurückkehrt
-
-  // Eintrag ist nur nutzbar, wenn Titel und Link vorhanden sind
   function istFertig(e) {
     return e.titel.trim() !== "" && e.linkUrl.trim() !== "";
   }
 
-  // Kacheln aufbauen
-  WUENSCHE.forEach(function (e) {
+  function zeige(name, fokus) {
+    Object.keys(schritte).forEach(function (k) { schritte[k].hidden = (k !== name); });
+    window.scrollTo(0, 0);
+    if (fokus) fokus.focus();
+  }
+
+  // Eine Kachel bauen. hinweis = kleine Zeile unter dem Namen (optional).
+  function kachel(e, hinweis, gesperrt, beiKlick) {
     var li = document.createElement("li");
     var b = document.createElement("button");
     b.type = "button";
     b.className = "kachel";
-    b.innerHTML = '<span class="kachel-icon" aria-hidden="true"></span><span class="kachel-name"></span>';
+    b.innerHTML = '<span class="kachel-icon" aria-hidden="true"></span>' +
+                  '<span class="kachel-text"><span class="kachel-name"></span><span class="kachel-hinweis"></span></span>';
     b.querySelector(".kachel-icon").textContent = e.icon;
     b.querySelector(".kachel-name").textContent = e.name;
-    if (istFertig(e)) {
-      b.addEventListener("click", function () { dialogOeffnen(e, b); });
-    } else {
+    b.querySelector(".kachel-hinweis").textContent = hinweis || "";
+    if (gesperrt) {
       b.disabled = true;
-      b.setAttribute("aria-label", e.name + " (noch kein Wunsch hinterlegt)");
+      b.setAttribute("aria-label", e.name + (hinweis ? " (" + hinweis + ")" : ""));
+    } else {
+      b.addEventListener("click", function () { letzteKachel = b; beiKlick(e); });
     }
     li.appendChild(b);
-    liste.appendChild(li);
+    return li;
+  }
+
+  // Schritt 1: alle Namen
+  var listeIch = document.getElementById("kacheln-ich");
+  WUENSCHE.forEach(function (e) {
+    listeIch.appendChild(kachel(e, "", false, ichWaehlen));
   });
 
-  function dialogOeffnen(eintrag, kachel) {
-    gewaehlt = eintrag;
-    letzteKachel = kachel;
-    hintergrund.hidden = false;
-    abbrechenKnopf.focus(); // sicherste Voreinstellung: "Lieber nicht"
+  // Schritt 2 neu aufbauen: nur die anderen Namen, unfertige Einträge gesperrt
+  function wahlAufbauen() {
+    var liste = document.getElementById("kacheln-wahl");
+    liste.innerHTML = "";
+    WUENSCHE.forEach(function (e) {
+      if (e.name === ich.name) return; // eigene Kachel wird gar nicht angezeigt
+      var hinweis = istFertig(e) ? "" : "noch kein Wunsch";
+      liste.appendChild(kachel(e, hinweis, !istFertig(e), wunschZeigen));
+    });
   }
 
-  function dialogSchliessen() {
-    hintergrund.hidden = true;
-    gewaehlt = null;
-    if (letzteKachel) letzteKachel.focus();
+  function ichWaehlen(e) {
+    ich = e;
+    var titel = document.getElementById("wahl-titel");
+    titel.textContent = "Hallo " + e.name + "!";
+    wahlAufbauen();
+    zeige("wahl", titel);
   }
 
-  // Detailansicht wird ausschließlich hier gefüllt, also nur nach "Ja"
-  function detailZeigen(e) {
+  // Schutz: Der eigene Wunsch wird nie angezeigt, auch nicht über Umwege
+  function wunschZeigen(e) {
+    if (!ich || e.name === ich.name || !istFertig(e)) return;
     document.getElementById("detail-icon").textContent = e.icon;
     document.getElementById("detail-name").textContent = "Wunsch von " + e.name;
     document.getElementById("detail-titel").textContent = e.titel;
@@ -58,43 +78,20 @@
     var link = document.getElementById("detail-link");
     link.textContent = e.linkText || "Zum Link";
     link.href = e.linkUrl;
-    start.hidden = true;
-    detail.hidden = false;
-    document.getElementById("detail-titel").focus();
-    window.scrollTo(0, 0);
+    zeige("wunsch", document.getElementById("detail-titel"));
   }
 
-  function detailSchliessen() {
-    detail.hidden = true;
+  document.getElementById("zurueck").addEventListener("click", function () {
+    // Wunschinhalte wieder entfernen
     document.getElementById("detail-titel").textContent = "";
     document.getElementById("detail-text").textContent = "";
     document.getElementById("detail-link").removeAttribute("href");
-    start.hidden = false;
-    if (letzteKachel) letzteKachel.focus();
-  }
-
-  jaKnopf.addEventListener("click", function () {
-    var e = gewaehlt;
-    hintergrund.hidden = true;
-    gewaehlt = null;
-    if (e) detailZeigen(e);
-  });
-  abbrechenKnopf.addEventListener("click", dialogSchliessen);
-  document.getElementById("zurueck").addEventListener("click", detailSchliessen);
-
-  // Klick neben den Dialog = abbrechen
-  hintergrund.addEventListener("click", function (ev) {
-    if (ev.target === hintergrund) dialogSchliessen();
+    zeige("wahl", letzteKachel);
   });
 
-  // Tastatur: Esc schließt, Tab bleibt im Dialog
-  document.addEventListener("keydown", function (ev) {
-    if (hintergrund.hidden) return;
-    if (ev.key === "Escape") { dialogSchliessen(); return; }
-    if (ev.key === "Tab") {
-      var a = jaKnopf, b = abbrechenKnopf;
-      if (ev.shiftKey && document.activeElement === a) { ev.preventDefault(); b.focus(); }
-      else if (!ev.shiftKey && document.activeElement === b) { ev.preventDefault(); a.focus(); }
-    }
+  document.getElementById("nicht-ich").addEventListener("click", function () {
+    ich = null;
+    document.getElementById("kacheln-wahl").innerHTML = "";
+    zeige("ich", schritte.ich.querySelector("h1"));
   });
 })();

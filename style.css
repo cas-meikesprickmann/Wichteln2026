@@ -72,27 +72,12 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); text-align: center; }
 .karte #detail-text { max-width: 28rem; color: var(--text-leise); }
 .karte .knopf { margin-top: .5rem; }
 
-/* Dialog */
-#dialog-hintergrund {
-  position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center;
-  padding: 1rem; background: rgba(4, 12, 9, .78); backdrop-filter: blur(4px);
-}
-#dialog {
-  max-width: 28rem; width: 100%; padding: 2rem 1.75rem;
-  background: #f6f1e4; color: #231a14; border-radius: 1.5rem;
-  animation: auf .2s ease-out;
-}
-@keyframes auf { from { transform: scale(.96); opacity: 0; } }
-#dialog h2 { font-size: 1.6rem; margin-bottom: .75rem; }
-#dialog p { margin: 0 0 .8rem; color: #4a3d33; }
-#dialog .dialog-frage { font-weight: 600; color: #231a14; }
-.dialog-knoepfe { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
-.dialog-knoepfe .knopf { flex: 1 1 12rem; }
-#dialog .knopf { background: var(--rot); border-color: var(--rot); color: #fff; }
-#dialog .knopf:hover { background: var(--rot-dunkel); }
-#dialog .knopf-leise { background: transparent; color: #231a14; border-color: rgba(35, 26, 20, .25); }
-#dialog .knopf-leise:hover { background: rgba(35, 26, 20, .07); }
-#dialog :focus-visible { outline-color: #231a14; }
+/* Zusatzzeile in Kacheln, zentrierter Knopf */
+.kachel-text { display: flex; flex-direction: column; align-items: center; }
+.kachel-hinweis { font-size: .85rem; font-weight: 400; color: var(--text-leise); }
+.kachel-hinweis:empty { display: none; }
+.mitte { text-align: center; margin: 2.5rem 0 0; }
+h1:focus { outline: none; }
 
 /* Tablet / Handy */
 @media (max-width: 48rem) { .kacheln { grid-template-columns: repeat(2, 1fr); } }
@@ -101,10 +86,11 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); text-align: center; }
   .intro { margin-bottom: 2.25rem; }
   .kacheln { grid-template-columns: 1fr; }
   .kachel { min-height: 0; flex-direction: row; justify-content: flex-start; gap: 1.1rem; padding: 1.1rem 1.25rem; }
+  .kachel-text { align-items: flex-start; }
   .kachel-icon { width: 3.5rem; height: 3.5rem; font-size: 1.8rem; }
   .karte { padding: 2.25rem 1.25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kachel, #dialog { animation: none; transition: none; }
+  .kachel { transition: none; }
 }
