@@ -13,8 +13,12 @@
   var ich = null;           // wer gerade die App benutzt (nur im Arbeitsspeicher)
   var letzteKachel = null;  // für den Fokus beim Zurückgehen
 
+  // Nur Links mit gültiger Adresse (https://...) werden angezeigt
+  function sichtbareLinks(e) {
+    return (e.links || []).filter(function (l) { return /^https?:\/\//i.test((l.url || "").trim()); });
+  }
   function istFertig(e) {
-    return e.titel.trim() !== "" && e.linkUrl.trim() !== "";
+    return e.titel.trim() !== "" && sichtbareLinks(e).length > 0;
   }
 
   function zeige(name, fokus) {
@@ -95,9 +99,17 @@
     document.getElementById("detail-name").textContent = "Wunsch von " + e.name;
     document.getElementById("detail-titel").textContent = e.titel;
     document.getElementById("detail-text").textContent = e.beschreibung;
-    var link = document.getElementById("detail-link");
-    link.textContent = e.linkText || "Zum Link";
-    link.href = e.linkUrl;
+    var box = document.getElementById("detail-links");
+    box.innerHTML = "";
+    sichtbareLinks(e).forEach(function (l) {
+      var a = document.createElement("a");
+      a.className = "knopf";
+      a.textContent = l.text || "Zum Link";
+      a.href = l.url.trim();
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      box.appendChild(a);
+    });
     zeige("wunsch", document.getElementById("detail-titel"));
   }
 
@@ -105,7 +117,7 @@
     // Wunschinhalte wieder entfernen
     document.getElementById("detail-titel").textContent = "";
     document.getElementById("detail-text").textContent = "";
-    document.getElementById("detail-link").removeAttribute("href");
+    document.getElementById("detail-links").innerHTML = "";
     zeige("wahl", letzteKachel);
   });
 

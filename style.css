@@ -108,8 +108,9 @@ h1::after { content: "✦"; display: block; margin-top: .9rem; font-size: .9rem;
 .karte h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); color: var(--rot); outline: none; }
 .karte p { margin: 0; white-space: pre-line; }
 .karte #detail-text { max-width: 28rem; color: #5a4a3e; }
-.karte #detail-link { margin-top: .5rem; background: var(--rot); border-color: var(--rot); color: #fff; }
-.karte #detail-link:hover { background: var(--rot-dunkel); }
+.links { display: flex; flex-direction: column; align-items: center; gap: .6rem; width: 100%; margin-top: .5rem; }
+.karte .links .knopf { background: var(--rot); border-color: var(--rot); color: #fff; max-width: 100%; }
+.karte .links .knopf:hover { background: var(--rot-dunkel); }
 .karte .knopf-leise { color: var(--tinte); border-color: rgba(58, 45, 36, .3); }
 .karte .knopf-leise:hover { background: rgba(58, 45, 36, .07); }
 .karte :focus-visible { outline-color: var(--rot); }

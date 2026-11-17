@@ -13,21 +13,21 @@
   <main>
     <!-- Seite 1: Begrüßung und Namenswahl -->
     <section id="schritt-ich">
-      <h1 tabindex="-1">Willkommen in der Wichtelstube</h1>
+      <h1 tabindex="-1">Willkommen liebe Wichtel</h1>
       <div class="hinweis">
-        <p>Hallo lieber Weihnachtswichtel. Schön, dass du da bist. Klicke zuerst an, wer DU bist. Danach geht es zu den Wünschen.</p>
+        <p>Hallo lieber Weihnachtswichtel. Schön, dass du da bist.</p>
         <p class="frage">Welcher Weihnachtswichtel bist du?</p>
       </div>
       <ul id="kacheln-ich" class="kacheln klein"></ul>
-      <p id="" class="datenhinweis" hidden></p>
+      <p id="datenhinweis" class="datenhinweis" hidden>Hinweis: Welcher Wunsch angeklickt wird, wird für die Wichtel-Organisation gespeichert.</p>
     </section>
 
     <!-- Seite 2: Wunsch auswählen (eigene Kachel wird ausgeblendet) -->
     <section id="schritt-wahl" hidden>
       <div class="hinweis">
         <h2 id="wahl-titel" tabindex="-1"></h2>
-        <p>Du kannst Dir nun den Wunsch anzeigen lassen, den sich dein Wichtel wünscht. Klicke dazu einfach auf den Namen deines Wichtels.</p>
-        <p>Bei Fragen melde dich bei unserer Weihnachtwunschkoordinatorin Meike.</p>
+        <p>Du kannst Dir nun den Wunsch anzeigen lassen, den dein Wichtel sich wünscht. Klicke dazu einfach auf den Namen deines Wichtels.</p>
+        <p>Bei Fragen melde dich bei unserer Weihnachtswichtelwunschkoordinatorin Meike.</p>
       </div>
       <ul id="kacheln-wahl" class="kacheln"></ul>
       <p class="mitte"><button type="button" id="nicht-ich" class="knopf knopf-leise">Zurück</button></p>
@@ -40,7 +40,7 @@
         <p class="detail-name" id="detail-name"></p>
         <h2 id="detail-titel" tabindex="-1"></h2>
         <p id="detail-text"></p>
-        <a id="detail-link" class="knopf" target="_blank" rel="noopener noreferrer"></a>
+        <div id="detail-links" class="links"></div>
         <button type="button" id="zurueck" class="knopf knopf-leise">Zurück</button>
       </article>
     </section>

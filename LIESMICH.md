@@ -13,7 +13,7 @@
 3. Nur den Text zwischen den Anführungszeichen ändern, dann **Commit changes**.
 4. Nach etwa 1 Minute ist die Änderung online.
 
-Leere Felder bei `titel` oder `linkUrl` = Kachel ist ausgegraut.
+Jeder Link ist eine Zeile `{ text: "...", url: "..." }` in der Liste `links`. Weitere Links = weitere Zeilen. Ohne Titel oder ohne Link mit Adresse ist die Kachel ausgegraut.
 
 ## Protokoll einrichten (wer klickt auf welchen Wunsch)
 1. Auf forms.google.com ein neues Formular erstellen. Zwei Fragen vom Typ **Kurzantwort**: „Wer klickt?“ und „Wessen Wunsch?“.
