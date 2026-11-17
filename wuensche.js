@@ -62,8 +62,8 @@ const WUENSCHE = [
   },
   {
     name: "Julian", icon: "🍬",
-    titel: "Platzhalter-Wunsch für Julian",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
+    titel: "IPhone Hülle und Portemonnaie ",
+    beschreibung: "Julian möchte sein Portemonnaie mit seinem Handy verbinden und wünscht sich dazu eine IPhone mit Mac Safe für sein IPhone 12 Pro",
     linkText: "Zur Wunschliste",
     linkUrl: "https://example.com"
   },
