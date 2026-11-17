@@ -69,17 +69,17 @@ const WUENSCHE = [
     beschreibung: "Meike freut sich über ein Beschriftungsgerät. Sie hat sich ein schönes Modell ausgesucht: P-touch E110 von Brother in schwarz&orange. Die Farbe ist nicht ganz so wichtig. Ein Beschriftungsgerät bruacht auch noch Beschriftungsbänder. Hier wünscht Meike sich: brother Schriftband TZe-131 TZE131, 12 mm schwarze Schrift aud weißem Band und weiße Schrift auf schwarzem Band.",
     links: [
       { text: "Zum Beschriftungsgerät", url: "https://www.bueroshop24.de/brother-p-touch-e110-beschriftungsgeraet-416204" },
-      { text: "Zum Schriftband (schwarz auf weiß)", url: "" },   // <- hier noch den Link eintragen
-      { text: "Zum Schriftband (weiß auf schwarz)", url: "" }    // <- hier noch den Link eintragen
+      { text: "Zum Schriftband (schwarz auf weiß)", url: "https://www.bueroshop24.de/brother-tze-231-schriftband-653162" },   // <- hier noch den Link eintragen
+      { text: "Zum Schriftband (weiß auf schwarz)", url: "https://www.bueroshop24.de/brother-tze-335-schriftband-784868" }    // <- hier noch den Link eintragen
     ]
   },
   {
     name: "Julian", icon: "🍬",
-    titel: "IPhone Hülle und Portemonnaie ",
-    beschreibung: "Julian möchte sein Portemonnaie mit seinem Handy verbinden und wünscht sich dazu eine IPhone mit Mac Safe für sein IPhone 12 Pro",
+    titel: "iPhone Hülle und Portemonnaie ",
+    beschreibung: "Julian möchte sein Portemonnaie mit seinem Handy verbinden und wünscht sich dazu eine iPhonehülle mit Mac Safe für sein IPhone 12 Pro und das smarte Portemonnaie von Apple.",
     links: [
-      { text: "Zur iPhone-Hülle", url: "" },    // <- hier noch den Link eintragen
-      { text: "Zum Portemonnaie", url: "" }     // <- hier noch den Link eintragen
+      { text: "Zur iPhone-Hülle", url: "https://amzn.eu/d/0impGN5n" },    // <- hier noch den Link eintragen
+      { text: "Zum Portemonnaie", url: "https://amzn.eu/d/08aBELML" }     // <- hier noch den Link eintragen
     ]
   },
   {
