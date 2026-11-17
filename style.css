@@ -1,131 +1,134 @@
 /* Design der App. Farben stehen oben und lassen sich hier zentral ändern. */
 :root {
-  --grund: #10221c;
-  --flaeche: #183029;
-  --flaeche-hover: #1d3a31;
-  --linie: rgba(251, 244, 228, .14);
-  --text: #f6f1e4;
-  --text-leise: rgba(246, 241, 228, .72);
-  --rot: #c0392b;
-  --rot-dunkel: #a02e22;
-  --gold: #e9c46a;
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --grund: #0c1e19;
+  --flaeche: #142a23;
+  --flaeche-hover: #1a3429;
+  --linie: rgba(212, 179, 106, .28);
+  --text: #f4ecdc;
+  --text-leise: rgba(244, 236, 220, .72);
+  --papier: #f4ecdc;
+  --tinte: #3a2d24;
+  --rot: #8f2a2a;
+  --rot-dunkel: #732121;
+  --gold: #d4b36a;
+  --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
+/* Farbwechsel nach der Namenswahl (Seite 2 und 3) */
+body[data-seite="wahl"], body[data-seite="wunsch"] {
+  --grund: #2c0f16; --flaeche: #43202a; --flaeche-hover: #53283a;
+}
+
 * { box-sizing: border-box; }
 body {
   margin: 0; min-height: 100vh;
-  background: var(--grund); color: var(--text); transition: background .6s ease;
+  background-color: var(--grund);
+  background-image: radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, .08), transparent 60%);
+  background-attachment: fixed;
+  color: var(--text); transition: background-color .6s ease;
   font-family: var(--sans); font-size: 1.05rem; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 [hidden] { display: none !important; }
-main { max-width: 56rem; margin: 0 auto; padding: 5rem 1.5rem 4rem; }
+main { position: relative; z-index: 2; max-width: 56rem; margin: 0 auto; padding: 4.5rem 1.5rem 4rem; }
 
-h1, h2 { margin: 0; line-height: 1.15; letter-spacing: -.02em; font-weight: 700; }
-h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); text-align: center; }
-.intro { text-align: center; margin: 1rem 0 3.5rem; color: var(--text-leise); }
+h1, h2 { margin: 0; font-family: var(--serif); font-weight: 500; line-height: 1.15; }
+h1 { font-size: clamp(2.2rem, 6.5vw, 3.6rem); text-align: center; letter-spacing: .01em; margin-bottom: 2.25rem; outline: none; }
+h1::after { content: "✦"; display: block; margin-top: .9rem; font-size: .9rem; color: var(--gold); }
+
+/* Schnee */
+.schnee { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.schnee span { position: absolute; top: -1rem; color: rgba(255, 255, 255, .6); animation: fallen linear infinite; }
+@keyframes fallen { to { transform: translateY(110vh) translateX(2rem); } }
+
+/* Hervorgehobener Kasten */
+.hinweis, .karte {
+  background: var(--papier); color: var(--tinte); text-align: center;
+  border: 1px solid var(--gold); border-radius: 1.1rem;
+  box-shadow: inset 0 0 0 6px var(--papier), inset 0 0 0 7px rgba(212, 179, 106, .75), 0 20px 50px rgba(0, 0, 0, .35);
+}
+.hinweis { max-width: 40rem; margin: 0 auto 2.75rem; padding: 2.75rem 2rem; }
+.hinweis p { margin: 0 0 .8rem; font-size: 1.15rem; }
+.hinweis p:last-child { margin-bottom: 0; }
+.hinweis h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); color: var(--rot); margin-bottom: 1rem; outline: none; }
+.hinweis .frage { margin-top: 1.4rem; font-family: var(--serif); font-size: clamp(1.7rem, 5vw, 2.3rem); line-height: 1.2; color: #231a14; }
 
 /* Kacheln */
 .kacheln { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
 .kachel {
   width: 100%; min-height: 10.5rem; padding: 1.5rem 1rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem;
   background: var(--flaeche); color: var(--text);
-  border: 1px solid var(--linie); border-radius: 1.25rem;
+  border: 1px solid var(--linie); border-radius: 1rem;
   font: inherit; cursor: pointer;
-  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.kachel-icon {
-  display: grid; place-items: center; width: 4.25rem; height: 4.25rem; border-radius: 50%;
-  background: rgba(246, 241, 228, .08); font-size: 2.1rem; line-height: 1;
-}
-.kachel-name { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
-.kachel:hover:not(:disabled) { border-color: var(--gold); background: var(--flaeche-hover); transform: translateY(-2px); }
+.kachel:hover:not(:disabled) { border-color: var(--gold); background: var(--flaeche-hover); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, .3); }
 .kachel:disabled { background: transparent; border-style: dashed; color: var(--text-leise); cursor: not-allowed; }
 .kachel:disabled .kachel-icon { filter: grayscale(1); opacity: .45; }
+.kachel-ober { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.kachel-ober:empty { display: none; }
+.kachel-icon {
+  display: grid; place-items: center; width: 4.25rem; height: 4.25rem; border-radius: 50%;
+  border: 1px solid var(--linie); background: rgba(244, 236, 220, .05); font-size: 2.1rem; line-height: 1;
+}
+.kachel-text { display: flex; flex-direction: column; align-items: center; }
+.kachel-name { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; }
+.kachel-hinweis { font-size: .85rem; color: var(--text-leise); }
+.kachel-hinweis:empty { display: none; }
+
+/* Kleinere Namenskacheln auf Seite 1 */
+.kacheln.klein .kachel { min-height: 0; padding: 1rem; gap: .5rem; }
+.kacheln.klein .kachel-icon { width: 3rem; height: 3rem; font-size: 1.5rem; }
+.kacheln.klein .kachel-name { font-size: 1.15rem; }
+
+.datenhinweis { margin: 2rem 0 0; text-align: center; font-size: .85rem; color: var(--text-leise); }
+.mitte { text-align: center; margin: 2.5rem 0 0; }
 
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
 /* Knöpfe */
 .knopf {
-  display: inline-block; font: inherit; font-weight: 600; text-decoration: none; text-align: center;
-  padding: .8rem 1.5rem; min-height: 3rem; border-radius: 999px; cursor: pointer;
+  display: inline-block; font: inherit; font-weight: 600; letter-spacing: .02em; text-decoration: none; text-align: center;
+  padding: .8rem 1.75rem; min-height: 3rem; border-radius: 999px; cursor: pointer;
   background: var(--gold); color: #2b2100; border: 1px solid var(--gold);
-  transition: background .15s ease;
+  transition: background .2s ease;
 }
-.knopf:hover { background: #f1d388; }
+.knopf:hover { background: #e2c88c; }
 .knopf-leise { background: transparent; color: var(--text); border-color: var(--linie); }
-.knopf-leise:hover { background: rgba(246, 241, 228, .08); }
+.knopf-leise:hover { background: rgba(244, 236, 220, .08); }
 
-/* Detailansicht */
-.karte {
-  max-width: 34rem; margin: 1rem auto 0; padding: 3rem 2rem; text-align: center;
-  background: var(--flaeche); border: 1px solid var(--linie); border-radius: 1.5rem;
-  display: flex; flex-direction: column; align-items: center; gap: 1rem;
-}
+/* Wunsch-Karte */
+.karte { max-width: 34rem; margin: 1rem auto 0; padding: 3rem 2.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .detail-icon {
   display: grid; place-items: center; width: 5.5rem; height: 5.5rem; border-radius: 50%;
-  background: rgba(246, 241, 228, .08); font-size: 2.8rem; line-height: 1;
+  border: 1px solid rgba(212, 179, 106, .8); background: rgba(0, 0, 0, .03); font-size: 2.8rem; line-height: 1;
 }
-.detail-name { margin: 0; color: var(--text-leise); }
-.karte h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); outline: none; }
+.detail-name { margin: 0; font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: #8a6d2f; }
+.karte h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); color: var(--rot); outline: none; }
 .karte p { margin: 0; white-space: pre-line; }
-.karte #detail-text { max-width: 28rem; color: var(--text-leise); }
-.karte .knopf { margin-top: .5rem; }
-
-/* Zusatzzeile in Kacheln, zentrierter Knopf */
-.kachel-text { display: flex; flex-direction: column; align-items: center; }
-.kachel-hinweis { font-size: .85rem; font-weight: 400; color: var(--text-leise); }
-.kachel-hinweis:empty { display: none; }
-.mitte { text-align: center; margin: 2.5rem 0 0; }
-h1:focus { outline: none; }
+.karte #detail-text { max-width: 28rem; color: #5a4a3e; }
+.karte #detail-link { margin-top: .5rem; background: var(--rot); border-color: var(--rot); color: #fff; }
+.karte #detail-link:hover { background: var(--rot-dunkel); }
+.karte .knopf-leise { color: var(--tinte); border-color: rgba(58, 45, 36, .3); }
+.karte .knopf-leise:hover { background: rgba(58, 45, 36, .07); }
+.karte :focus-visible { outline-color: var(--rot); }
 
 /* Tablet / Handy */
 @media (max-width: 48rem) { .kacheln { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 30rem) {
   main { padding-top: 3rem; }
-  .intro { margin-bottom: 2.25rem; }
+  .hinweis { padding: 2.25rem 1.25rem; }
   .kacheln { grid-template-columns: 1fr; }
   .kachel { min-height: 0; flex-direction: row; justify-content: flex-start; gap: 1.1rem; padding: 1.1rem 1.25rem; }
-  .kachel-text { align-items: flex-start; }
   .kachel-icon { width: 3.5rem; height: 3.5rem; font-size: 1.8rem; }
-  .karte { padding: 2.25rem 1.25rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .kachel { transition: none; }
-}
-
-/* Farbwechsel nach der Namenswahl (Seite 2 und 3) */
-body[data-seite="wahl"], body[data-seite="wunsch"] {
-  --grund: #3b1119; --flaeche: #55202a; --flaeche-hover: #6a2a36;
-}
-
-/* Schnee */
-.schnee { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.schnee span { position: absolute; top: -1rem; color: rgba(255, 255, 255, .7); animation: fallen linear infinite; }
-@keyframes fallen { to { transform: translateY(110vh) translateX(2rem); } }
-main { position: relative; z-index: 2; }
-
-/* Hervorgehobener Kasten */
-h1 { margin-bottom: 2rem; }
-.hinweis {
-  max-width: 40rem; margin: 0 auto 2.5rem; padding: 2rem 1.75rem; text-align: center;
-  background: #f6f1e4; color: #3a2d24; border: 3px solid var(--gold); border-radius: 1.5rem;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
-}
-.hinweis p { margin: 0 0 .8rem; font-size: 1.15rem; }
-.hinweis p:last-child { margin-bottom: 0; }
-.hinweis h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); color: #a02e22; margin-bottom: 1rem; outline: none; }
-.hinweis .frage { margin-top: 1.25rem; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 700; line-height: 1.2; color: #231a14; }
-
-/* Kleinere Namenskacheln auf Seite 1 */
-.kacheln.klein .kachel { min-height: 0; padding: 1rem; gap: .6rem; }
-.kacheln.klein .kachel-icon { width: 3rem; height: 3rem; font-size: 1.5rem; }
-.kacheln.klein .kachel-name { font-size: 1.05rem; }
-@media (max-width: 30rem) {
+  .kachel-text { align-items: flex-start; }
   .kacheln.klein { grid-template-columns: repeat(2, 1fr); }
-  .kacheln.klein .kachel { flex-direction: column; justify-content: center; padding: 1rem .75rem; }
-  .hinweis { padding: 1.5rem 1.25rem; }
+  .kacheln.klein .kachel { flex-direction: column; justify-content: center; padding: 1rem .75rem; gap: .5rem; }
+  .kacheln.klein .kachel-icon { width: 3rem; height: 3rem; font-size: 1.5rem; }
+  .karte { padding: 2.5rem 1.5rem; }
 }
-@media (prefers-reduced-motion: reduce) { .schnee { display: none; } body { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .schnee { display: none; }
+  body, .kachel, .knopf { transition: none; }
+}

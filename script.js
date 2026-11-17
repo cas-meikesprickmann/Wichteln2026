@@ -1,6 +1,7 @@
 /* Logik der App – hier musst du nichts ändern.
    Ablauf: "Ich bin ..." wählen -> Namenskachel einer anderen Person -> Wunsch.
-   Die eigene Kachel wird nicht angezeigt. Es wird nichts gespeichert (kein Tracking, keine Cookies). */
+   Die eigene Kachel wird nicht angezeigt.
+   Der Klick auf einen Wunsch wird nur gemeldet, wenn in tracking.js etwas eingetragen ist. */
 (function () {
   "use strict";
 
@@ -24,13 +25,14 @@
   }
 
   // Eine Kachel bauen. hinweis = kleine Zeile unter dem Namen (optional).
-  function kachel(e, hinweis, gesperrt, beiKlick) {
+  function kachel(e, hinweis, gesperrt, beiKlick, oben) {
     var li = document.createElement("li");
     var b = document.createElement("button");
     b.type = "button";
     b.className = "kachel";
-    b.innerHTML = '<span class="kachel-icon" aria-hidden="true"></span>' +
+    b.innerHTML = '<span class="kachel-ober"></span><span class="kachel-icon" aria-hidden="true"></span>' +
                   '<span class="kachel-text"><span class="kachel-name"></span><span class="kachel-hinweis"></span></span>';
+    b.querySelector(".kachel-ober").textContent = oben || "";
     b.querySelector(".kachel-icon").textContent = e.icon;
     b.querySelector(".kachel-name").textContent = e.name;
     b.querySelector(".kachel-hinweis").textContent = hinweis || "";
@@ -44,10 +46,26 @@
     return li;
   }
 
+  // Meldet "wer hat welchen Wunsch angeklickt" an das Google-Formular (siehe tracking.js)
+  function trackingAktiv() {
+    return typeof TRACKING !== "undefined" && TRACKING.formUrl && TRACKING.feldWer && TRACKING.feldWunsch;
+  }
+  function protokollieren(wer, wunsch) {
+    if (!trackingAktiv()) return;
+    try {
+      var daten = new URLSearchParams();
+      daten.append(TRACKING.feldWer, wer.name);
+      daten.append(TRACKING.feldWunsch, wunsch.name);
+      fetch(TRACKING.formUrl, { method: "POST", mode: "no-cors", body: daten, keepalive: true })
+        .catch(function () {}); // Fehler bleiben für die Wichtel unsichtbar
+    } catch (err) {}
+  }
+  if (trackingAktiv()) document.getElementById("datenhinweis").hidden = false;
+
   // Schritt 1: alle Namen
   var listeIch = document.getElementById("kacheln-ich");
   WUENSCHE.forEach(function (e) {
-    listeIch.appendChild(kachel(e, "", false, ichWaehlen));
+    listeIch.appendChild(kachel(e, "", false, ichWaehlen, "Ich bin"));
   });
 
   // Schritt 2 neu aufbauen: nur die anderen Namen, unfertige Einträge gesperrt
@@ -72,6 +90,7 @@
   // Schutz: Der eigene Wunsch wird nie angezeigt, auch nicht über Umwege
   function wunschZeigen(e) {
     if (!ich || e.name === ich.name || !istFertig(e)) return;
+    protokollieren(ich, e);
     document.getElementById("detail-icon").textContent = e.icon;
     document.getElementById("detail-name").textContent = "Wunsch von " + e.name;
     document.getElementById("detail-titel").textContent = e.titel;
