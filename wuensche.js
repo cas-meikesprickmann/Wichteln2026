@@ -55,10 +55,10 @@ const WUENSCHE = [
   },
   {
     name: "Meike", icon: "🛷",
-    titel: "Platzhalter-Wunsch für Meike",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Ein Beschriftungsgerät für Meike",
+    beschreibung: "Meike freut sich über ein Beschriftungsgerät. Sie hat sich ein schönes Modell ausgesucht: P-touch E110 von Brother in schwarz&orange. Die Farbe ist nicht ganz so wichtig. Ein Beschriftungsgerät bruacht auch noch Beschriftungsbänder. Hier wünscht Meike sich: brother Schriftband TZe-131 TZE131, 12 mm schwarze Schrift aud weißem Band und weiße Schrift auf schwarzem Band.",
+    linkText: "Zum Beschriftungsgerät",
+    linkUrl: "https://www.bueroshop24.de/brother-p-touch-e110-beschriftungsgeraet-416204"
   },
   {
     name: "Julian", icon: "🍬",
@@ -69,9 +69,9 @@ const WUENSCHE = [
   },
   {
     name: "Christel", icon: "🎅",
-    titel: "Platzhalter-Wunsch für Christel",
-    beschreibung: "Hier steht später die Beschreibung des Wunsches.",
-    linkText: "Zur Wunschliste",
-    linkUrl: "https://example.com"
+    titel: "Ein TV-Zeitschriften Abo für Christel",
+    beschreibung: "Christel ließt sehr gerne die TV-Zeitschrift TV Hören und Sehen. Sie würde sich sehr über ein Jahresabofreuen.",
+    linkText: "Zum Jahres-Abo",
+    linkUrl: "https://www.abomix.de/tv-hoeren-sehen/jahresabo"
   }
 ];
