@@ -1,11 +1,11 @@
 /* Design der App. Farben stehen oben und lassen sich hier zentral ändern. */
 :root {
-  --grund: #0c1e19;
-  --flaeche: #142a23;
-  --flaeche-hover: #1a3429;
-  --linie: rgba(212, 179, 106, .28);
+  --grund: #091712;
+  --flaeche: #1b3b30;
+  --flaeche-hover: #235042;
+  --linie: rgba(212, 179, 106, .55);
   --text: #f4ecdc;
-  --text-leise: rgba(244, 236, 220, .72);
+  --text-leise: rgba(244, 236, 220, .88);
   --papier: #f4ecdc;
   --tinte: #3a2d24;
   --rot: #8f2a2a;
@@ -38,7 +38,7 @@ h1::after { content: "✦"; display: block; margin-top: .9rem; font-size: .9rem;
 
 /* Schnee */
 .schnee { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.schnee span { position: absolute; top: -1rem; color: rgba(255, 255, 255, .6); animation: fallen linear infinite; }
+.schnee span { position: absolute; top: -1rem; color: rgba(255, 255, 255, .75); animation: fallen linear infinite; }
 @keyframes fallen { to { transform: translateY(110vh) translateX(2rem); } }
 
 /* Hervorgehobener Kasten */
@@ -66,7 +66,7 @@ h1::after { content: "✦"; display: block; margin-top: .9rem; font-size: .9rem;
 .kachel:hover:not(:disabled) { border-color: var(--gold); background: var(--flaeche-hover); transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, .3); }
 .kachel:disabled { background: transparent; border-style: dashed; color: var(--text-leise); cursor: not-allowed; }
 .kachel:disabled .kachel-icon { filter: grayscale(1); opacity: .45; }
-.kachel-ober { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.kachel-ober { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #ecd08a; }
 .kachel-ober:empty { display: none; }
 .kachel-icon {
   display: grid; place-items: center; width: 4.25rem; height: 4.25rem; border-radius: 50%;

@@ -13,6 +13,11 @@
   var ich = null;           // wer gerade die App benutzt (nur im Arbeitsspeicher)
   var letzteKachel = null;  // für den Fokus beim Zurückgehen
 
+  // Reihenfolge der Kacheln: Diese Person steht immer als Erste, der Rest bleibt wie in wuensche.js
+  var ZUERST = "Christel";
+  var REIHE = WUENSCHE.filter(function (e) { return e.name === ZUERST; })
+              .concat(WUENSCHE.filter(function (e) { return e.name !== ZUERST; }));
+
   // Nur Links mit gültiger Adresse (https://...) werden angezeigt
   function sichtbareLinks(e) {
     return (e.links || []).filter(function (l) { return /^https?:\/\//i.test((l.url || "").trim()); });
@@ -68,7 +73,7 @@
 
   // Schritt 1: alle Namen
   var listeIch = document.getElementById("kacheln-ich");
-  WUENSCHE.forEach(function (e) {
+  REIHE.forEach(function (e) {
     listeIch.appendChild(kachel(e, "", false, ichWaehlen, "Ich bin"));
   });
 
@@ -76,7 +81,7 @@
   function wahlAufbauen() {
     var liste = document.getElementById("kacheln-wahl");
     liste.innerHTML = "";
-    WUENSCHE.forEach(function (e) {
+    REIHE.forEach(function (e) {
       if (e.name === ich.name) return; // eigene Kachel wird gar nicht angezeigt
       var hinweis = istFertig(e) ? "" : "noch kein Wunsch";
       liste.appendChild(kachel(e, hinweis, !istFertig(e), wunschZeigen));
